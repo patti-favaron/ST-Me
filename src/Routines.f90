@@ -1,3 +1,27 @@
+! =============================================================================
+!
+! MIT License
+!
+! Copyright (c) 2023 Patrizia Favaron
+!
+! Permission is hereby granted, free of charge, to any person obtaining a copy
+! of this software and associated documentation files (the "Software"), to deal
+! in the Software without restriction, including without limitation the rights
+! to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+! copies of the Software, and to permit persons to whom the Software is
+! furnished to do so, subject to the following conditions:
+!
+! The above copyright notice and this permission notice shall be included in all
+! copies or substantial portions of the Software.
+!
+! THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+! IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+! FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+! AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+! LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+! OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+! SOFTWARE.
+!
 MODULE routines
 
 	USE Calendar
@@ -338,7 +362,7 @@ CONTAINS
 		implicit none
 
 		! Routine arguments
-		real, intent(in)	:: rTemp			! (¡C)
+		real, intent(in)	:: rTemp			! (Â¡C)
 		integer, intent(in)	:: iCalculationType	! ASCE_STANDARDEQ, ASCE_MEANTEMPERATURE
 		real				:: rLambda			! (MJ/kg)
 
@@ -365,7 +389,7 @@ CONTAINS
 
 		! Routine arguments
 		real, intent(in)				:: rZ		! Reference height at which pressure is desired (m)
-		real, dimension(:), intent(in)	:: rvTemp	! Air temperature (¡C)
+		real, dimension(:), intent(in)	:: rvTemp	! Air temperature (Â¡C)
 		real, intent(in)				:: rZr		! Height at which temperature measurements are taken (m)
 		integer, intent(in)				:: iCalculationType	! ASCE_STANDARDATMOSPHERE, ASCE_STANDARDEQ, ASCE_MEANTEMPERATURE
 		real							:: rPk		! Estimated pressure (kPa, as used in ASCE equations; multiply by 10 for normal use and reporting)
@@ -419,7 +443,7 @@ CONTAINS
 		implicit none
 
 		! Routine arguments
-		real, intent(in)	:: Temp		! (¡C)
+		real, intent(in)	:: Temp		! (Â¡C)
 		real, intent(in)	:: ea		! (kPa)
 		real, intent(in)	:: P		! (kPa)
 		real				:: Tv		! (K)
@@ -488,7 +512,7 @@ CONTAINS
 
 		! Routine arguments
 		real, intent(in)	:: Pres		! Air pressure (hPa)
-		real, intent(in)	:: Temp		! Air temperature (¡C)
+		real, intent(in)	:: Temp		! Air temperature (Â¡C)
 		real, intent(in)	:: Vel		! Wind speed (m / s)
 		real, intent(in)	:: Rn		! Net radiation (W / m2)
 		real, intent(in)	:: G		! Ground heat flux (W / m2)
@@ -500,7 +524,7 @@ CONTAINS
 
 		! Locals
 		real	:: Delta	! Slope (first derivative) of saturation vapor pressure relation
-		real	:: gamma	! Psychrometric constant (kPa / ¡C)
+		real	:: gamma	! Psychrometric constant (kPa / Â¡C)
 		real	:: Vel2		! Wind speed at 2 m above ground
 		real	:: h		! Vegetation height (m)
 		real	:: d		! Displacement height (m)
@@ -607,7 +631,7 @@ CONTAINS
 !	==================================================================
 	Function E_SAT(T)
 !	==================================================================
-!	Tensione di vapore alla saturazione (la temperatura è in °C)
+!	Tensione di vapore alla saturazione (la temperatura Ã¨ in Â°C)
 !	------------------------------------------------------------------
 	E_SAT = 6.1 + T*(0.475 + T*(0.0095 + 0.0005*T))
 !
@@ -620,7 +644,7 @@ CONTAINS
 	! Clausius-Clapeyron formula. This routine is the recommended
 	! replacement of E_SAT.
 	!
-	!     Input: T = air temperature (°C)
+	!     Input: T = air temperature (Â°C)
 	!
 	!     Output: ESAT = saturation vapor pression (hPa)
 	!
@@ -667,7 +691,7 @@ CONTAINS
 
 
     ! Compute the derivative of the saturation vapor pressure multiplied
-    ! by P/0.622; the input temperature is in °K.
+    ! by P/0.622; the input temperature is in Â°K.
 	FUNCTION D_E_SAT(T) RESULT(DEsat)
 
 	    ! Routine arguments
@@ -689,7 +713,7 @@ CONTAINS
 	FUNCTION DewPoint(rTemp, rRelH) RESULT(rTdew)
 
 		! Routine arguments
-		REAL, INTENT(IN)	:: rTemp	! Temperature (°C)
+		REAL, INTENT(IN)	:: rTemp	! Temperature (Â°C)
 		REAL, INTENT(IN)	:: rRelH	! Relative humidity (%)
 		REAL				:: rTdew
 
@@ -699,8 +723,8 @@ CONTAINS
 		! Constants
 		REAL, PARAMETER	:: a =   6.1121	! hPa
 		REAL, PARAMETER	:: b =  18.678	! ---
-		REAL, PARAMETER	:: c = 257.14	! °C
-		REAL, PARAMETER	:: d = 234.5	! °C
+		REAL, PARAMETER	:: c = 257.14	! Â°C
+		REAL, PARAMETER	:: d = 234.5	! Â°C
 
 		! Check parameters
 		IF(rTemp < -40.0 .OR. rTemp > 60.0 .OR. rRelH < 0.0 .OR. rRelH > 100.0) THEN
@@ -1037,7 +1061,7 @@ CONTAINS
 
 		! Routine arguments
 		real, intent(in)	:: Lat		! Latitude (degrees)
-		real, intent(in)	:: Temp		! Air temperature (¡C)
+		real, intent(in)	:: Temp		! Air temperature (Â¡C)
 		real, intent(in)	:: H0		! Turbulent sensible heat flux (W/m2)
 		real, intent(in)	:: Ustar	! Friction velocity (m/s)
 		real, intent(in)	:: L		! Obukhov length (m)
