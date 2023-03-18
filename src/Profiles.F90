@@ -1,12 +1,33 @@
 ! Profiles - Module supporting the generation, smoothing and
 !            blending of wind and temperature profiles.
 !
-! Copyright 2006 by Servizi Territorio srl
-!                   All rights reserved
+! =============================================================================
+!
+! MIT License
+!
+! Copyright (c) 2023 Patrizia Favaron
+!
+! Permission is hereby granted, free of charge, to any person obtaining a copy
+! of this software and associated documentation files (the "Software"), to deal
+! in the Software without restriction, including without limitation the rights
+! to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+! copies of the Software, and to permit persons to whom the Software is
+! furnished to do so, subject to the following conditions:
+!
+! The above copyright notice and this permission notice shall be included in all
+! copies or substantial portions of the Software.
+!
+! THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+! IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+! FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+! AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+! LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+! OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+! SOFTWARE.
 !
 MODULE Profiles
 
-	USE Routines
+    USE Routines
 
     IMPLICIT NONE
     
@@ -57,7 +78,7 @@ CONTAINS
         REAL, DIMENSION(:), INTENT(IN)  :: z    ! Heights (m)
         REAL, INTENT(IN)                :: zr   ! Anemometer height (m)
         REAL, INTENT(IN)                :: vr   ! Wind speed at anemometer height (m/s)
-        REAL, INTENT(IN)                :: dir  ! Wind direction at anemometer height (� from N)
+        REAL, INTENT(IN)                :: dir  ! Wind direction at anemometer height (째 from N)
         REAL, INTENT(IN)                :: z0   ! Roughness length (m)
         REAL, INTENT(IN)                :: hmix ! Mixing height (m)
         REAL, INTENT(IN)                :: us   ! Friction velocity (m/s)
@@ -141,14 +162,14 @@ CONTAINS
         REAL, DIMENSION(:), INTENT(IN)  :: z        ! Heights (m; minimum height > 0)
         REAL, INTENT(IN)                :: z0       ! Roughness length (m)
         REAL, INTENT(IN)                :: zr       ! Temperature measurement height (m)
-        REAL, INTENT(IN)                :: Tr       ! Temperature at 'zr' (캩)
-        REAL, INTENT(IN)                :: rGamma   ! Temp. lapse rate above the ABL (캩/m)
+        REAL, INTENT(IN)                :: Tr       ! Temperature at 'zr' (째K)
+        REAL, INTENT(IN)                :: rGamma   ! Temp. lapse rate above the ABL (째K/m)
         REAL, INTENT(IN)                :: zi       ! Mixing height (m)
-        REAL, INTENT(IN)                :: Ts       ! Scale temperature (캩)
+        REAL, INTENT(IN)                :: Ts       ! Scale temperature (째K)
         REAL, INTENT(IN)                :: us       ! Friction velocity (m/s)
         REAL, INTENT(IN)                :: hm       ! Scaled reciprocal of Monin-Obukhov Length (---)
         REAL, INTENT(IN)                :: h0       ! Turbulent flux of sensible heat (W/m2)
-        REAL, DIMENSION(:), INTENT(OUT) :: T        ! Temperature profile (캩)
+        REAL, DIMENSION(:), INTENT(OUT) :: T        ! Temperature profile (째K)
         INTEGER                         :: iRetCode
         
         ! Locals
@@ -199,7 +220,7 @@ CONTAINS
         ! Set the lapse rate to a "sensible" default,
         ! if an "invalid" value was passed
         IF(rGamma < VALIDITY_THRESHOLD) THEN
-            gamma = 0.0098 ! 캩/m
+            gamma = 0.0098 ! 째K/m
         ELSE
             gamma = rGamma
         END IF
