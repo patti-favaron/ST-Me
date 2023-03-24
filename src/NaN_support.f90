@@ -39,6 +39,6 @@ module NaN_support
 	public	:: NaN
 	
 	! A ready-to-use non-signalling NaN value:
-    real, parameter	:: NaN      = Z'7FC00000'
+    real, parameter	:: NaN      = real(Z'7FC00000', kind=4)
     
 end module NaN_support
